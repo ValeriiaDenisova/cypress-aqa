@@ -1,7 +1,4 @@
-import LoginPage from "../../support/pageObject/page/LoginPage"
-import testData from "../../fixtures/credentials.json"
-
-describe('API test ', () => {
+describe('Intercept test ', () => {
     beforeEach(() => {
 
     })

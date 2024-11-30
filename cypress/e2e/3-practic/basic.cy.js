@@ -7,7 +7,7 @@ describe('Basic query', () => {
     it('GET', () => {
 
         cy.get('#APjFqb').type("Hello World!")
-        cy.get('.gNO89b').last().click()
+        cy.get('#APjFqb').type('Cypress.io{enter}')
         cy.get('#logo').should('be.visible')
     })
 })

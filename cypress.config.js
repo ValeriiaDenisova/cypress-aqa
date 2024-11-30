@@ -19,6 +19,6 @@ module.exports = defineConfig({
       html: true,
       json: false
     },
-    specPattern: 'cypress/e2e/4-POM/testEnv.cy.js'
+    // specPattern: 'cypress/e2e/4-POM/testEnv.cy.js'
   },
 });

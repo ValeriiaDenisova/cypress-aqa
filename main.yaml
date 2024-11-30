@@ -1,0 +1,42 @@
+name: Run Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Docker image with Cypress
+      - name: Set up Docker container with Cypress
+        run: |
+          docker run -d --name cypress-container \
+            -v ${{ github.workspace }}:/e2e \
+            -w /e2e \
+            cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1 tail -f /dev/null
+
+      # Install dependencies inside the Docker container
+      - name: Install dependencies
+        run: |
+          docker exec cypress-container npm install
+
+      # Run Cypress tests
+      - name: Run Cypress tests
+        run: |
+          docker exec cypress-container npx cypress run
+
+      # Stop and remove the Docker container after tests
+      - name: Clean up
+        run: |
+          docker stop cypress-container
+          docker rm cypress-container
